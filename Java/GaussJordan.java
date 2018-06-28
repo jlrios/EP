@@ -22,25 +22,23 @@ public class GaussJordan {
     }
   }
 
-  public static void hacerCeros(int f) {
-    double c = matriz[f][0];
+  public static void hacerCeros(int fila, int columna, int filaAux) {
+    double c = matriz[fila][columna];
 
-    if (matriz[f][0] < 0) {
-      for (int i = 0; i <=3; i++) {
-        matriz[0][i] = matriz[0][i] * matriz[f][0];
-      }
-    } else {
-      for (int i = 0; i <=3; i++) {
-        matriz[f][i] = (-c * matriz[0][i]) + matriz[f][i];
-      }
+    if (c < 0) {
+      c = Math.abs(c);
     }
 
-    //for (int i = 0; i <=3; i++) {
-      //matriz[1][i] = matriz[0][i] + matriz[1][i];
-    //}
-
-    //imprimirMatriz();
-  }
+    if (matriz[fila][columna] < 0) {
+      for (int i = 0; i <= 3; i++) {
+        matriz[fila][i] = (c * matriz[filaAux][i]) + matriz[fila][i];
+      }
+    } else {
+      for (int i = 0; i <= 3; i++) {
+        matriz[fila][i] = ((-c) * matriz[filaAux][i]) + matriz[fila][i];
+      }
+    }
+}
 
   public static void obtenerUnos(int fila, int columna) {
     // Multiplicar x el inverso para obtener el primer 1 en la fila 1 columna 1.
@@ -48,7 +46,6 @@ public class GaussJordan {
 
       inverso = 1 / matriz[fila][columna];
 
-    System.out.println(inverso);
     for (int i = 0; i <= 3; i++) {
         matriz[fila][i] = inverso * matriz[fila][i];
     }
@@ -57,13 +54,14 @@ public class GaussJordan {
 
   public static void resolverMatriz()  {
     obtenerUnos(0, 0);
-    hacerCeros(1);
-    hacerCeros(2);
-
-    imprimirMatriz();
+    hacerCeros(1, 0, 0);
+    hacerCeros(2, 0, 0);
+    obtenerUnos(1, 1);
+    hacerCeros(2, 1, 1);
 
     obtenerUnos(1, 1);
-
+    obtenerUnos(2, 2);
+    
     imprimirMatriz();
   }
 
