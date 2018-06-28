@@ -2,10 +2,16 @@ import java.util.Scanner;
 
 public class GaussJordan {
 
-  static double matriz[][] = {
+  /*static double matriz[][] = {
     {2,  3,  1,  1},
     {3, -2,  -4, -3},
     {5, -1, -1,  4}
+  };*/
+
+  static double matriz[][] = {
+    {2, -1, 3, 5},
+    {2, 2, 3, 7},
+    {-2, 3, 0, -3}
   };
 
   static Scanner columnas = new Scanner(System.in);
@@ -16,10 +22,12 @@ public class GaussJordan {
 
     for (int x = 1; x <= 3; x++) {
       for (int y = 1; y <= 4; y++) {
-        System.out.print(String.format("%.2f", matriz[x-1][y-1]) + "  ");
+        System.out.print(String.format("%.2f", matriz[x - 1][y - 1]) + "  ");
       }
       System.out.println();
     }
+
+    System.out.println();
   }
 
   public static void hacerCeros(int fila, int columna, int filaAux) {
@@ -41,7 +49,6 @@ public class GaussJordan {
 }
 
   public static void obtenerUnos(int fila, int columna) {
-    // Multiplicar x el inverso para obtener el primer 1 en la fila 1 columna 1.
     double inverso;
 
       inverso = 1 / matriz[fila][columna];
@@ -61,7 +68,11 @@ public class GaussJordan {
 
     obtenerUnos(1, 1);
     obtenerUnos(2, 2);
-    
+
+    hacerCeros(1, 2, 2);
+    hacerCeros(0, 2, 2);
+    hacerCeros(0, 1, 1);
+
     imprimirMatriz();
   }
 
@@ -91,10 +102,6 @@ public class GaussJordan {
     System.out.print("R3: ");
     columna = columnas.nextDouble();
     matriz[2][3] = columna;*/
-
-
-
-    System.out.println();
 
     for (int x = 1; x <= 3; x++) {
       for (int y = 1; y <= 4; y++) {
