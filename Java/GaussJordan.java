@@ -4,7 +4,7 @@ public class GaussJordan {
 
   static double matriz[][] = {
     {2,  3,  1,  1},
-    {3, -2,  4, -3},
+    {3, -2,  -4, -3},
     {5, -1, -1,  4}
   };
 
@@ -16,7 +16,7 @@ public class GaussJordan {
 
     for (int x = 1; x <= 3; x++) {
       for (int y = 1; y <= 4; y++) {
-        System.out.print(matriz[x-1][y-1] + "  ");
+        System.out.print(String.format("%.2f", matriz[x-1][y-1]) + "  ");
       }
       System.out.println();
     }
@@ -39,23 +39,32 @@ public class GaussJordan {
       //matriz[1][i] = matriz[0][i] + matriz[1][i];
     //}
 
-    imprimirMatriz();
+    //imprimirMatriz();
   }
 
-  public static void obtenerUnos() {
+  public static void obtenerUnos(int fila, int columna) {
     // Multiplicar x el inverso para obtener el primer 1 en la fila 1 columna 1.
-    Double inverso = 1 / matriz[0][0];
+    double inverso;
 
+      inverso = 1 / matriz[fila][columna];
+
+    System.out.println(inverso);
     for (int i = 0; i <= 3; i++) {
-        matriz[0][i] = inverso * matriz[0][i];
+        matriz[fila][i] = inverso * matriz[fila][i];
     }
 
   }
 
   public static void resolverMatriz()  {
-    obtenerUnos();
+    obtenerUnos(0, 0);
     hacerCeros(1);
     hacerCeros(2);
+
+    imprimirMatriz();
+
+    obtenerUnos(1, 1);
+
+    imprimirMatriz();
   }
 
   public static void main(String args[]) {
